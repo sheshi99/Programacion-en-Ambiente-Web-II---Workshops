@@ -2,13 +2,25 @@ const express = require('express');
 
 const router = express.Router()
 
-module.exports = router;
-
 const Model = require('../models/model');
 
 //Post Method
-router.post('/post', (req, res) => {
+/*router.post('/post', (req, res) => {
     res.send('Post API')
+})¨*/
+
+router.post('/post', (req, res) => {
+    const data = new Model({
+        name: req.body.name,
+        age: req.body.age
+    })
+
+    try{
+
+    }
+    catch(error){
+
+    }
 })
 
 //Get all Method
@@ -31,4 +43,10 @@ router.patch('/update/:id', (req, res) => {
 router.delete('/delete/:id', (req, res) => {
     res.send('Delete by ID API')
 })
+
+
+module.exports = router;
+
+
+
 
