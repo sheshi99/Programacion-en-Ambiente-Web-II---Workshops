@@ -10,14 +10,14 @@ const Model = require('../models/model');
 })¨*/
 
 //Post Method
-router.post('/post', (req, res) => {
+router.post('/post', async (req, res) => {
     const data = new Model({
         name: req.body.name,
         age: req.body.age
     })
 
     try {
-        const dataToSave = data.save();
+        const dataToSave = await data.save();
         res.status(200).json(dataToSave)
     }
     catch (error) {
