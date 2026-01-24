@@ -4,6 +4,7 @@ const router = express.Router()
 
 module.exports = router;
 
+const Model = require('../models/model');
 
 //Post Method
 router.post('/post', (req, res) => {
@@ -30,3 +31,4 @@ router.patch('/update/:id', (req, res) => {
 router.delete('/delete/:id', (req, res) => {
     res.send('Delete by ID API')
 })
+
