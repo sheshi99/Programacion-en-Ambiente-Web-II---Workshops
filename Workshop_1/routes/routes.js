@@ -30,7 +30,6 @@ router.get('/getAll', (req, res) => {
     res.send('Get All API')
 })
 
-
 //Get by ID Method
 router.get('/getOne/:id', (req, res) => {
     res.send(req.params.id)
