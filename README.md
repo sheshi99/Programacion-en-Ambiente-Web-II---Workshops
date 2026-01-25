@@ -3,9 +3,12 @@
 **Carrera:** Ingeniería de Software  
 **Curso:** Programación en Ambiente Web II  
 
-**Estudiante:** Seidy María Alanis Balladares 
-**Docente:** Bladimir Arroyo Blanco
+**Estudiante:** Seidy María Alanis Balladares  
+
+**Docente:** Bladimir Arroyo Blanco  
+
 **Periodo:** 2026  
+
 
 ## Workshop 1
 
