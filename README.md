@@ -28,3 +28,7 @@ Ejemplo de conexión:
 
 ```txt
 mongodb+srv://nishant:********@cluster0.xduyh.mongodb.net/testDatabase
+
+Se empleo la instalación local; por lo que, la conexión se realizó con:
+
+mongodb://localhost:27017/testDatabase
