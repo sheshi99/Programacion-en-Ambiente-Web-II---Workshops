@@ -7,21 +7,23 @@
   <script>
     const apiURL = "http://localhost:3001/course";
 
-    const listCourses = async () => {
-      try {
-        const res = await fetch(apiURL);
-        const data = await res.json();
-        let html = "<ul>";
-        data.forEach(course => {
-          html += `<li>${course.name} (${course.credits} créditos)</li>`;
+    function listCourses() {
+      fetch(apiURL)
+        .then(response => response.json())
+        .then(data => {
+          let html = "<ul>";
+          data.forEach(course => {
+            html += `<li>${course.name} (${course.credits} créditos)</li>`;
+          });
+          html += "</ul>";
+          document.getElementById('result').innerHTML = html;
+        })
+        .catch(err => {
+          document.getElementById('result').textContent = `Error: ${err.message}`;
         });
-        html += "</ul>";
-        document.getElementById('result').innerHTML = html;
-      } catch (err) {
-        document.getElementById('result').textContent = `Error: ${err.message}`;
-      }
-    };
+    }
 
+    // Cargar la lista al abrir la página
     window.onload = listCourses;
   </script>
 </head>
