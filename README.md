@@ -46,3 +46,15 @@ Se empleo la instalación local; por lo que, la conexión se realizó con:
 ```txt
 mongodb://localhost:27017/testDatabase
 ```
+
+
+## Workshop 2
+
+Usando el código de referencia de la semana 2 en Git, modifica el código del cliente y de la Web API para hacer lo siguiente:
+
+  1. Implementar las funciones PUT y DELETE en la Web API.
+
+  2. Implementar una página en el cliente que permita crear un curso llamando a la API.
+
+  3. Implementar una página en el cliente que permita listar todos los cursos llamando a la API.
+
