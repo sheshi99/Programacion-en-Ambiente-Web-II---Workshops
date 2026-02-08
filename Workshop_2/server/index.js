@@ -84,6 +84,23 @@ app.put('/course/:id', async (req, res) => {
     }
 });
 
+app.delete('/course/:id', async (req, res) => {
+    try {
+        const courseId = req.params.id;
+
+        const deletedCourse = await Course.findByIdAndDelete(courseId);
+
+        if (!deletedCourse) {
+            return res.status(404).json({ message: "Course not found" });
+        }
+
+        res.status(200).json({ message: "Course deleted successfully" });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+
 
 
 
