@@ -60,6 +60,32 @@ app.get('/course', async (req, res) => {
     }
 })
 
+app.put('/course/:id', async (req, res) => {
+    try {
+        const courseId = req.params.id;
+
+        // findByIdAndUpdate: actualiza y retorna el nuevo documento si ponemos { new: true }
+        const updatedCourse = await Course.findByIdAndUpdate(
+            courseId,
+            {
+                name: req.body.name,
+                credits: req.body.credits
+            },
+            { new: true } // para retornar el documento actualizado
+        );
+
+        if (!updatedCourse) {
+            return res.status(404).json({ message: "Course not found" });
+        }
+
+        res.status(200).json(updatedCourse);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+});
+
+
+
 
 //start the app
 app.listen(3001, () => console.log(`UTN API service listening on port 3001!`))
