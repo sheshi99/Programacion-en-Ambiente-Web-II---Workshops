@@ -60,6 +60,11 @@ app.get('/professor', async (req, res) => {
             return res.status(200).json(data)
         }
         const data = await Professor.findById(req.query.id);
+        
+        if (!data) {
+            return res.sendStatus(404);
+        }
+        
         res.status(200).json(data)
     }
     catch(error){
