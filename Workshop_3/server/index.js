@@ -119,16 +119,13 @@ app.delete('/professor/:id', async (req, res) => {
 
 
 
-
-
-
-
-
 //routes
 app.post('/course', async (req, res) => {
     const course = new Course({
         name: req.body.name,
-        credits: req.body.credits
+        code: req.body.code,
+        description: req.body.description,
+        professorId: req.body.professorId
     })
 
     try {
@@ -150,6 +147,11 @@ app.get('/course', async (req, res) => {
             return res.status(200).json(data)
         }
         const data = await Course.findById(req.query.id);
+        
+        if (!data) {
+            return res.sendStatus(404);
+        }
+        
         res.status(200).json(data)
     }
     catch(error){
