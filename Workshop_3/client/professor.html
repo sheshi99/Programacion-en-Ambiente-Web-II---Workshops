@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gestión de Profesores</title>
+<link rel="stylesheet" href="styles.css">
+
+<script>
+const apiBase = 'http://localhost:3001';
+let editingProfessorId = null;
+
+// ====== LISTAR PROFESORES ======
+function listProfessors() {
+  fetch(`${apiBase}/professor`)
+    .then(res => res.json())
+    .then(data => {
+      const tbody = document.querySelector('#professorTable tbody');
+      tbody.innerHTML = '';
+      data.forEach(p => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${p.firstName}</td>
+          <td>${p.lastName}</td>
+          <td>${p.idNumber}</td>
+          <td>${p.age}</td>
+          <td>
+            <button onclick='editProfessor("${p._id}")'>Editar</button>
+            <button onclick='deleteProfessor("${p._id}")'>Eliminar</button>
+          </td>`;
+        tbody.appendChild(tr);
+      });
+    })
+    .catch(err => console.log(err));
+}
+
+
+// ====== EDITAR PROFESOR ======
+function editProfessor(id) {
+  fetch(`${apiBase}/professor?id=${id}`)
+    .then(res => res.json())
+    .then(p => {
+      if(!p) return alert('Profesor no encontrado');
+      editingProfessorId = p._id;
+      document.getElementById('firstName').value = p.firstName;
+      document.getElementById('lastName').value = p.lastName;
+      document.getElementById('idNumber').value = p.idNumber;
+      document.getElementById('age').value = p.age;
+      document.getElementById('saveBtn').textContent = "Actualizar Profesor";
+    })
+    .catch(err => console.log(err));
+}
+
+// ====== AGREGAR O ACTUALIZAR PROFESOR ======
+function saveProfessor() {
+  const data = {
+    firstName: document.getElementById('firstName').value,
+    lastName: document.getElementById('lastName').value,
+    idNumber: document.getElementById('idNumber').value,
+    age: document.getElementById('age').value
+  };
+
+  if(editingProfessorId) {
+    fetch(`${apiBase}/professor/${editingProfessorId}`, {
+      method: 'PUT',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(data)
+    })
+    .then(() => {
+      editingProfessorId = null;
+      document.getElementById('saveBtn').textContent = "Agregar Profesor";
+      listProfessors();
+    })
+    .catch(err => console.log(err));
+  } else {
+    fetch(`${apiBase}/professor`, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(data)
+    })
+    .then(() => listProfessors())
+    .catch(err => console.log(err));
+  }
+
+  // limpiar inputs
+  document.getElementById('firstName').value = '';
+  document.getElementById('lastName').value = '';
+  document.getElementById('idNumber').value = '';
+  document.getElementById('age').value = '';
+}
+
+// ====== ELIMINAR PROFESOR ======
+function deleteProfessor(id) {
+  if(!confirm("¿Eliminar este profesor?")) return;
+  fetch(`${apiBase}/professor/${id}`, { method: 'DELETE' })
+    .then(() => listProfessors())
+    .catch(err => console.log(err));
+}
+
+// ejecutar al cargar la página
+window.onload = listProfessors;
+</script>
+
+</head>
+<body>
+<h2>Profesores</h2>
+
+<div>
+  <input id="firstName" placeholder="Nombre">
+  <input id="lastName" placeholder="Apellidos">
+  <input id="idNumber" placeholder="Cédula">
+  <input id="age" placeholder="Edad" type="number">
+  <button id="saveBtn" onclick="saveProfessor()">Agregar Profesor</button>
+</div>
+
+<table id="professorTable">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Apellidos</th>
+      <th>Cédula</th>
+      <th>Edad</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+</body>
+</html>
