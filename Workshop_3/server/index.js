@@ -168,16 +168,19 @@ app.put('/course/:id', async (req, res) => {
             courseId,
             {
                 name: req.body.name,
-                credits: req.body.credits
+                code: req.body.code,
+                description: req.body.description,
+                professorId: req.body.professorId
             },
-            { new: true } // para retornar el documento actualizado
+            { new: true, runValidators: true }
         );
 
         if (!updatedCourse) {
-            return res.status(404).json({ message: "Course not found" });
+            return res.status(404);
         }
 
         res.status(200).json(updatedCourse);
+
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
