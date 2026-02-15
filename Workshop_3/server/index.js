@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const Course = require('./models/course');
 const Professor = require('./models/professor');
 
+
 mongoose.connect('mongodb://127.0.0.1:27017/utnapi');
 const database = mongoose.connection;
 
@@ -50,6 +51,25 @@ app.post('/professor', async (req, res) => {
         res.status(400).json({message: error.message})
     }
 });
+
+app.get('/professor', async (req, res) => {
+    try{
+        //if id is passed as query param, return single course else return all courses
+        if(!req.query.id){
+            const data = await Professor.find();
+            return res.status(200).json(data)
+        }
+        const data = await Professor.findById(req.query.id);
+        res.status(200).json(data)
+    }
+    catch(error){
+        res.status(500).json({message: error.message})
+    }
+})
+
+
+
+
 
 
 
