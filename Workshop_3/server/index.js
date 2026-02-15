@@ -176,7 +176,7 @@ app.put('/course/:id', async (req, res) => {
         );
 
         if (!updatedCourse) {
-            return res.status(404);
+            return res.sendStatus(404);
         }
 
         res.status(200).json(updatedCourse);
@@ -193,11 +193,11 @@ app.delete('/course/:id', async (req, res) => {
         const deletedCourse = await Course.findByIdAndDelete(courseId);
 
         if (!deletedCourse) {
-            return res.status(404);
+            return res.sendStatus(404);
         }
 
         res.status(200).json(deletedCourse);
-        
+
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
