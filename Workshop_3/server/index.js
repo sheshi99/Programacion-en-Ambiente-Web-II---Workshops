@@ -25,7 +25,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors({
   domains: '*',
-  methods: '*'
+  methods: ['POST','GET','PUT','DELETE']
 }));
 
 
