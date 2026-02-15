@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crear Curso</title>
+  <script>
+    const apiURL = "http://localhost:3001/course";
+
+    function createCourse() {
+      const name = document.getElementById('courseName').value;
+      const credits = Number(document.getElementById('courseCredits').value);
+
+      fetch(apiURL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, credits })
+      })
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('message').textContent =
+          `Curso creado: ${data.name} (${data.credits} créditos)`;
+        document.getElementById('courseForm').reset();
+      })
+      .catch(err => {
+        document.getElementById('message').textContent = `Error: ${err.message}`;
+      });
+    }
+  </script>
+</head>
+<body>
+  <h1>Crear Curso</h1>
+
+  <form id="courseForm" onsubmit="event.preventDefault(); createCourse();">
+    <input type="text" id="courseName" placeholder="Nombre del curso" required>
+    <input type="number" id="courseCredits" placeholder="Créditos" required>
+    <button type="submit">Crear Curso</button>
+  </form>
+
+  <p id="message"></p>
+  <p><a href="index.html">Volver al Menú</a></p>
+</body>
+</html>

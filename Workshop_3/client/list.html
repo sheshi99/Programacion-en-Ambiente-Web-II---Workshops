@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Listado de Cursos</title>
+  <script>
+    const apiURL = "http://localhost:3001/course";
+
+    function listCourses() {
+      fetch(apiURL)
+        .then(response => response.json())
+        .then(data => {
+          let html = "<ul>";
+          data.forEach(course => {
+            html += `<li>${course.name} (${course.credits} créditos)</li>`;
+          });
+          html += "</ul>";
+          document.getElementById('result').innerHTML = html;
+        })
+        .catch(err => {
+          document.getElementById('result').textContent = `Error: ${err.message}`;
+        });
+    }
+
+    // Cargar la lista al abrir la página
+    window.onload = listCourses;
+  </script>
+</head>
+<body>
+  <h1>Listado de Cursos</h1>
+  <div id="result"></div>
+  <p><a href="index.html">Volver al Menú</a></p>
+</body>
+</html>
