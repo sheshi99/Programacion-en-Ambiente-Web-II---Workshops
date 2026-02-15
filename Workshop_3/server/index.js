@@ -27,6 +27,32 @@ app.use(cors({
   methods: '*'
 }));
 
+
+// ==========================
+// PROFESSOR ROUTES
+// ==========================
+
+app.post('/professor', async (req, res) => {
+    const professor = new Professor({
+        firstName: req.body.firstname,
+        lastName: req.body.lastname,
+        idNumber: req.body.idNumber,
+        age: req.body.age
+    })
+
+    try {
+        const professorCreated = await professor.save();
+        //add header location to the response
+        res.header('Location', `/professor?id=${professorCreated._id}`);
+        res.status(201).json(professorCreated)
+    }
+    catch (error) {
+        res.status(400).json({message: error.message})
+    }
+});
+
+
+
 //routes
 app.post('/course', async (req, res) => {
     const course = new Course({
