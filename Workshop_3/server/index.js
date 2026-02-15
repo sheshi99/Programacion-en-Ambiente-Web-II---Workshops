@@ -35,8 +35,8 @@ app.use(cors({
 
 app.post('/professor', async (req, res) => {
     const professor = new Professor({
-        firstName: req.body.firstname,
-        lastName: req.body.lastname,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
         idNumber: req.body.idNumber,
         age: req.body.age
     })
@@ -59,12 +59,13 @@ app.get('/professor', async (req, res) => {
             const data = await Professor.find();
             return res.status(200).json(data)
         }
+
         const data = await Professor.findById(req.query.id);
         
         if (!data) {
             return res.sendStatus(404);
         }
-        
+
         res.status(200).json(data)
     }
     catch(error){
