@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const professorSchema = new mongoose.Schema({
-    firstname: {
+    firstName: {
         required: true,
         type: String
     },
-    lastname: {
+    lastName: {
         required: true,
         type: String
     },
