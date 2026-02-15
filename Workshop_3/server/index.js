@@ -80,8 +80,8 @@ app.put('/professor/:id', async (req, res) => {
         const updatedProfessor = await Professor.findByIdAndUpdate(
             req.params.id,
             {
-                firstName: req.body.firstname,
-                lastName: req.body.lastname,
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
                 idNumber: req.body.idNumber,
                 age: req.body.age
             },
@@ -119,7 +119,10 @@ app.delete('/professor/:id', async (req, res) => {
 
 
 
-//routes
+// ==========================
+// COURSE ROUTES
+// ==========================
+
 app.post('/course', async (req, res) => {
     const course = new Course({
         name: req.body.name,
