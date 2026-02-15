@@ -82,6 +82,10 @@ app.put('/professor/:id', async (req, res) => {
             { new: true, runValidators: true } 
             // Returns the updated document and performs validations
         );
+     
+        if (!updatedProfessor) {
+            return res.sendStatus(404);
+        }
 
         res.status(200).json(updatedProfessor);
         
@@ -99,7 +103,7 @@ app.delete('/professor/:id', async (req, res) => {
         if (!deletedProfessor) {
             return res.sendStatus(404);
         }
-        
+
         res.status(200).json(deletedProfessor);
 
     } catch (error) {
