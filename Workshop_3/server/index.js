@@ -68,6 +68,29 @@ app.get('/professor', async (req, res) => {
 })
 
 
+app.put('/professor/:id', async (req, res) => {
+    try {
+
+        const updatedProfessor = await Professor.findByIdAndUpdate(
+            req.params.id,
+            {
+                firstName: req.body.firstname,
+                lastName: req.body.lastname,
+                idNumber: req.body.idNumber,
+                age: req.body.age
+            },
+            { new: true, runValidators: true } 
+            // Returns the updated document and performs validations
+        );
+
+        res.status(200).json(updatedProfessor);
+        
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+});
+
+
 
 
 
