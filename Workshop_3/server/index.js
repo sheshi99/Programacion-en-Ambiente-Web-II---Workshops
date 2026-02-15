@@ -90,6 +90,24 @@ app.put('/professor/:id', async (req, res) => {
     }
 });
 
+app.delete('/professor/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+
+        const deletedProfessor = await Professor.findByIdAndDelete(id);
+
+        if (!deletedProfessor) {
+            return res.sendStatus(404);
+        }
+        
+        res.status(200).json(deletedProfessor);
+
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+
 
 
 
