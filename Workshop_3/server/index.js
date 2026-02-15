@@ -3,6 +3,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 const Course = require('./models/course');
+const Professor = require('./models/professor');
 
 mongoose.connect('mongodb://127.0.0.1:27017/utnapi');
 const database = mongoose.connection;
@@ -25,7 +26,6 @@ app.use(cors({
   domains: '*',
   methods: '*'
 }));
-
 
 //routes
 app.post('/course', async (req, res) => {
