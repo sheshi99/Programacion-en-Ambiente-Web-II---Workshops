@@ -193,10 +193,11 @@ app.delete('/course/:id', async (req, res) => {
         const deletedCourse = await Course.findByIdAndDelete(courseId);
 
         if (!deletedCourse) {
-            return res.status(404).json({ message: "Course not found" });
+            return res.status(404);
         }
 
-        res.status(200).json({ message: "Course deleted successfully" });
+        res.status(200).json(deletedCourse);
+        
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
