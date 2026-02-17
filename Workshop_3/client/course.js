@@ -3,7 +3,9 @@ let editingCourseId = null;
 
 // ====== CARGAR PROFESORES PARA SELECT ======
 function loadProfessors() {
-  fetch(`${apiBase}/professor`)
+  fetch(`${apiBase}/professor`, {
+    method: 'GET'
+  })
     .then(res => res.json())
     .then(data => {
       const select = document.getElementById('courseProfessor');
@@ -20,7 +22,9 @@ function loadProfessors() {
 
 // ====== LISTAR CURSOS ======
 function listCourses() {
-  fetch(`${apiBase}/course`)
+  fetch(`${apiBase}/course`, {
+    method: 'GET'
+  })
     .then(res => res.json())
     .then(data => {
       const tbody = document.querySelector('#courseTable tbody');
