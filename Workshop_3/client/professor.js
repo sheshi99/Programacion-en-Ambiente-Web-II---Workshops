@@ -3,11 +3,14 @@ let editingProfessorId = null;
 
 // ====== LISTAR PROFESORES ======
 function listProfessors() {
-  fetch(`${apiBase}/professor`)
+  fetch(`${apiBase}/professor`, {
+    method: 'GET'
+  })
     .then(res => res.json())
     .then(data => {
       const tbody = document.querySelector('#professorTable tbody');
       tbody.innerHTML = '';
+
       data.forEach(p => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
@@ -27,7 +30,9 @@ function listProfessors() {
 
 // ====== EDITAR PROFESOR ======
 function editProfessor(id) {
-  fetch(`${apiBase}/professor?id=${id}`)
+  fetch(`${apiBase}/professor?id=${id}`, {
+    method: 'GET'
+  })
     .then(res => res.json())
     .then(p => {
       if(!p) return alert('Profesor no encontrado');
