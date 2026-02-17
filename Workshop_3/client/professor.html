@@ -10,13 +10,13 @@
 <body>
 <h2>Profesores</h2>
 
-<div>
-  <input id="firstName" placeholder="Nombre">
-  <input id="lastName" placeholder="Apellidos">
-  <input id="idNumber" placeholder="Cédula">
-  <input id="age" placeholder="Edad" type="number">
-  <button id="saveBtn" onclick="saveProfessor()">Agregar Profesor</button>
-</div>
+<form onsubmit="event.preventDefault(); saveProfessor();">
+  <input id="firstName" placeholder="Nombre" required>
+  <input id="lastName" placeholder="Apellidos" required>
+  <input id="idNumber" placeholder="Cédula" required>
+  <input id="age" placeholder="Edad" type="number" required>
+  <button type="submit" id="saveBtn">Agregar Profesor</button>
+</form>
 
 <table id="professorTable">
   <thead>
