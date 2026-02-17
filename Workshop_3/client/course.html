@@ -11,16 +11,13 @@
 <body>
 <h2>Cursos</h2>
 
-<form onsubmit="event.preventDefault(); addOrUpdateCourse();">
-  <input id="courseName" placeholder="Nombre del curso" required>
-  <input id="courseCode" placeholder="Código" required>
-  <input id="courseDescription" placeholder="Descripción" required>
-  <select id="courseProfessor" required>
-    <option value="">--</option>
-  </select> 
-  <button type="submit">Agregar Curso</button>
-</form>
-
+<div>
+  <input id="courseName" placeholder="Nombre del curso">
+  <input id="courseCode" placeholder="Código">
+  <input id="courseDescription" placeholder="Descripción">
+  <select id="courseProfessor"></select>
+  <button onclick="addOrUpdateCourse()">Agregar Curso</button>
+</div>
 
 <table id="courseTable">
   <thead>
@@ -38,3 +35,6 @@
 <a href="index.html">Regresar a Menú</a>
 </body>
 </html>
+
+
+
