@@ -32,6 +32,30 @@ app.use(cors({
 
 app.post('/login', generateToken);
 
+
+// ==========================
+// USERS ROUTES
+// ==========================
+
+app.post('/users', async (req, res) => {
+    const user = new User({
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password
+    })
+
+    try {
+        const userCreated = await user.save();
+        //add header location to the response
+        res.header('Location', `/users?id=${userCreated._id}`);
+        res.status(201).json(userCreated)
+    }
+    catch (error) {
+        res.status(400).json({message: error.message})
+    }
+});
+
+
 // ==========================
 // PROFESSOR ROUTES
 // ==========================
