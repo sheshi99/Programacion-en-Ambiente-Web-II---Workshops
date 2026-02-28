@@ -40,6 +40,7 @@ app.post('/login', generateToken);
 app.post('/users', async (req, res) => {
     const user = new User({
         name: req.body.name,
+        lastName: req.body.lastName,
         email: req.body.email,
         password: req.body.password
     })
