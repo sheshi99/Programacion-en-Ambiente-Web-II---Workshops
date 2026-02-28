@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gestión de Profesores</title>
+<link rel="stylesheet" href="styles.css">
+<script src="professor.js" defer></script> <!-- Enlazamos JS externo -->
+</head>
+<body>
+<h2>Profesores</h2>
+
+<form onsubmit="event.preventDefault(); saveProfessor();">
+  <input id="firstName" placeholder="Nombre" required>
+  <input id="lastName" placeholder="Apellidos" required>
+  <input id="idNumber" placeholder="Cédula" required>
+  <input id="age" placeholder="Edad" type="number" required>
+  <button type="submit" id="saveBtn">Agregar Profesor</button>
+</form>
+
+<table id="professorTable">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Apellidos</th>
+      <th>Cédula</th>
+      <th>Edad</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<a href="index.html">Regresar a Menú</a>
+</body>
+</html>

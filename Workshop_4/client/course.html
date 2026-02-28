@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gestión de Cursos</title>
+<link rel="stylesheet" href="styles.css">
+<script src="course.js" defer></script> <!-- Enlazamos JS externo -->
+</head>
+
+<body>
+<h2>Cursos</h2>
+
+<div>
+  <input id="courseName" placeholder="Nombre del curso">
+  <input id="courseCode" placeholder="Código">
+  <input id="courseDescription" placeholder="Descripción">
+  <select id="courseProfessor"></select>
+  <button onclick="addOrUpdateCourse()">Agregar Curso</button>
+</div>
+
+<table id="courseTable">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Código</th>
+      <th>Descripción</th>
+      <th>Profesor</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<a href="index.html">Regresar a Menú</a>
+</body>
+</html>
+
+
+
