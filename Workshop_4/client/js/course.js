@@ -1,10 +1,16 @@
 const apiBase = 'http://localhost:3001';
 let editingCourseId = null;
+const token = sessionStorage.getItem('token');
+
+if (!token) {
+  location.href = '../html/login.html';
+}
 
 // ====== CARGAR PROFESORES PARA SELECT ======
 function loadProfessors() {
   fetch(`${apiBase}/professor`, {
-    method: 'GET'
+    method: 'GET',
+    headers: {'Authorization': `Bearer ${token}` },
   })
     .then(res => res.json())
     .then(data => {
@@ -23,7 +29,10 @@ function loadProfessors() {
 // ====== LISTAR CURSOS ======
 function listCourses() {
   fetch(`${apiBase}/course`, {
-    method: 'GET'
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
   })
     .then(res => res.json())
     .then(data => {
@@ -70,7 +79,11 @@ function addOrUpdateCourse() {
   if (editingCourseId) {
     fetch(`${apiBase}/course/${editingCourseId}`, {
       method: 'PUT',
-      headers: {'Content-Type':'application/json'},
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      
       body: JSON.stringify(data)
     })
     .then(() => {
@@ -82,7 +95,10 @@ function addOrUpdateCourse() {
   } else {
     fetch(`${apiBase}/course`, {
       method: 'POST',
-      headers: {'Content-Type':'application/json'},
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
       body: JSON.stringify(data)
     })
     .then(() => listCourses())
@@ -98,7 +114,12 @@ function addOrUpdateCourse() {
 // ====== ELIMINAR CURSO ======
 function deleteCourse(id) {
   if(!confirm("¿Desea eliminar este curso?")) return;
-  fetch(`${apiBase}/course/${id}`, { method: 'DELETE' })
+  fetch(`${apiBase}/course/${id}`, { 
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
     .then(() => listCourses())
     .catch(err => console.log(err));
 }
