@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Registro de Usuarios</title>
 <link rel="stylesheet" href="styles.css">
-<script src="" defer></script> <!-- Enlazamos JS externo -->
+<script src="../js/users.js" defer></script> <!-- Enlazamos JS externo -->
 </head>
 <body>
 <h2>Registro de Usuarios</h2>
 
-<form onsubmit="event.preventDefault();">
+<form onsubmit="event.preventDefault(); saveUser();">
   <input id="name" placeholder="Nombre" required>
   <br><br>
 
