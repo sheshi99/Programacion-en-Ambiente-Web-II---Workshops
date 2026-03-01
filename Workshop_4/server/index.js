@@ -31,7 +31,7 @@ app.use(cors({
 }));
 
 
-app.post('/login', generateToken);
+app.post('/auth/token', generateToken);
 
 
 // ==========================
