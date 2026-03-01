@@ -100,16 +100,40 @@ function saveProfessor() {
 }
 
 // ====== ELIMINAR PROFESOR ======
+
 function deleteProfessor(id) {
-  if(!confirm("¿Desea eliminar este profesor?")) return;
+  if (!confirm("¿Desea eliminar este profesor?")) return;
+
   fetch(`${apiBase}/professor/${id}`, { 
     method: 'DELETE',
     headers: {
       'Authorization': `Bearer ${token}`
     }
   })
-    .then(() => listProfessors())
-    .catch(err => console.log(err));
+  .then(res => {
+
+    if (res.status === 400) {
+      alert("No se puede eliminar el profesor porque tiene cursos asignados");
+      return;
+    }
+
+    if (res.status === 404) {
+      alert("Profesor no encontrado");
+      return;
+    }
+
+    if (res.status === 200) {
+      alert("Profesor eliminado correctamente");
+      listProfessors();
+      return;
+    }
+
+    alert("Error inesperado");
+  })
+  .catch(err => {
+    console.log(err);
+    alert("Error de conexión con el servidor");
+  });
 }
 
 // ejecutar al cargar la página
