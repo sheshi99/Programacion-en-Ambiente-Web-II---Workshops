@@ -1,10 +1,16 @@
 const apiBase = 'http://localhost:3001';
 let editingProfessorId = null;
+const token = sessionStorage.getItem('token');
+
+if (!token) {
+  location.href = '../html/login.html';
+}
 
 // ====== LISTAR PROFESORES ======
 function listProfessors() {
   fetch(`${apiBase}/professor`, {
-    method: 'GET'
+    method: 'GET',
+    headers: {'Authorization': `Bearer ${token}` },
   })
     .then(res => res.json())
     .then(data => {
@@ -31,7 +37,8 @@ function listProfessors() {
 // ====== EDITAR PROFESOR ======
 function editProfessor(id) {
   fetch(`${apiBase}/professor?id=${id}`, {
-    method: 'GET'
+    method: 'GET',
+    headers: {'Authorization': `Bearer ${token}` },
   })
     .then(res => res.json())
     .then(p => {
@@ -58,7 +65,11 @@ function saveProfessor() {
   if(editingProfessorId) {
     fetch(`${apiBase}/professor/${editingProfessorId}`, {
       method: 'PUT',
-      headers: {'Content-Type':'application/json'},
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      
       body: JSON.stringify(data)
     })
     .then(() => {
@@ -70,7 +81,11 @@ function saveProfessor() {
   } else {
     fetch(`${apiBase}/professor`, {
       method: 'POST',
-      headers: {'Content-Type':'application/json'},
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      
       body: JSON.stringify(data)
     })
     .then(() => listProfessors())
@@ -87,7 +102,12 @@ function saveProfessor() {
 // ====== ELIMINAR PROFESOR ======
 function deleteProfessor(id) {
   if(!confirm("¿Desea eliminar este profesor?")) return;
-  fetch(`${apiBase}/professor/${id}`, { method: 'DELETE' })
+  fetch(`${apiBase}/professor/${id}`, { 
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
     .then(() => listProfessors())
     .catch(err => console.log(err));
 }
