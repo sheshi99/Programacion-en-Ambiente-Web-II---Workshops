@@ -129,23 +129,29 @@ app.put('/professor/:id',authenticateToken, async (req, res) => {
     }
 });
 
+
 app.delete('/professor/:id', authenticateToken, async (req, res) => {
     try {
         const id = req.params.id;
 
+        const courses = await Course.find({ professorId: id });
+
+        if (courses.length > 0) {
+            return res.sendStatus(400); 
+        }
+
         const deletedProfessor = await Professor.findByIdAndDelete(id);
 
         if (!deletedProfessor) {
-            return res.sendStatus(404);
+            return res.sendStatus(404); 
         }
 
-        res.status(200).json(deletedProfessor);
+        return res.sendStatus(200); 
 
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        return res.sendStatus(500);
     }
 });
-
 
 
 // ==========================
