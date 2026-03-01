@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 const Course = require('./models/course');
 const Professor = require('./models/professor');
+const User = require('./models/users');
 
 const { authenticateToken, generateToken } = require('./controllers/auth');
 
