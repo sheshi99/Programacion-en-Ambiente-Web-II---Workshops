@@ -9,7 +9,7 @@ async function iniciarSesion() {
     }
 
     try {
-        const response = await fetch(`${apiBaseUrl}/login`, {
+        const response = await fetch(`${apiBaseUrl}/auth/token`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
